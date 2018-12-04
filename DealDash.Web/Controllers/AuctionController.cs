@@ -27,6 +27,11 @@ namespace DealDash.Web.Controllers
             }
         }
 
+        public ActionResult Listing()
+        {
+            var allAuctions = auctionService.GetAllAuctions();
+            return View(allAuctions);
+        }
         [HttpGet]
         public ActionResult Create()
         {
@@ -36,7 +41,7 @@ namespace DealDash.Web.Controllers
         public ActionResult Create(Auction auction)
         {
             auctionService.SaveAuction(auction);
-            return RedirectToAction("Index");
+            return RedirectToAction("Listing");
         }
         [HttpGet]
         public ActionResult Edit(int ID)
@@ -48,7 +53,7 @@ namespace DealDash.Web.Controllers
         public ActionResult Edit(Auction auction)
         {
             auctionService.UpdateAuction(auction);
-            return RedirectToAction("Index");
+            return RedirectToAction("Listing");
         }
         [HttpGet]
         public ActionResult Delete(int ID)
@@ -60,7 +65,7 @@ namespace DealDash.Web.Controllers
         public ActionResult Delete(Auction auction)
         {
             auctionService.DeleteAuction(auction);
-            return RedirectToAction("Index");
+            return RedirectToAction("Listing");
         }
         public ActionResult Details(int ID)
         {
