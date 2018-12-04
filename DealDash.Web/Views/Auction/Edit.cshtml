@@ -1,0 +1,51 @@
+﻿@model DealDash.Entities.Auction
+
+
+<h2>Edit</h2>
+
+<form method="post" id="editForm">
+    <input name="ID" value="@Model.ID" type="hidden" />
+
+    <label>Auction Title</label>
+    <input name="Title" value="@Model.Title" />
+    <br />
+
+    <label>Image Url</label>
+    <input name="ImageUrl" value="@Model.ImageUrl" />
+    <br />
+
+    <label>Description</label>
+    <input name="Description" value="@Model.Description" />
+    <br />
+
+    <label>Actual Amount</label>
+    <input name="ActualAmount" value="@Model.ActualAmount" />
+    <br />
+
+    <label>StartingTime</label>
+    <input name="StartingTime" value="@Model.StartingTime" />
+    <br />
+    <label>EndinTime</label>
+    <input name="EndingTime" value="@Model.EndingTime" />
+    <br />
+
+    <Button id="saveButton">Submit</Button>
+</form>
+
+<script>
+
+    $("#saveButton").click(function () {
+        $.ajax({
+            url: "@Url.Action("Edit","Auction")",
+            method: "post",
+            data: $("#editForm").serialize()
+        })
+            .done(function (response) {
+                debugger;
+                $("#listingArea").html(response);
+            });
+    });
+</script>
+
+
+
