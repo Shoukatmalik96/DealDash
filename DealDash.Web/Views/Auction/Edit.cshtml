@@ -3,40 +3,54 @@
 
 <h2>Edit</h2>
 
+
+
+<div class="modal-header">
+    <h5 class="modal-title">Edit Auction</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 <form method="post" id="editForm">
-    <input name="ID" value="@Model.ID" type="hidden" />
+    <div class="modal-body">
+        <input name="ID" value="@Model.ID" type="hidden" />
 
-    <div class="form-group">
+        <div class="form-group">
 
-        <label>Title</label>
-        <input name="Title" class="form-control" placeholder="Enter Title" value="@Model.Title">
+            <label>Title</label>
+            <input name="Title" class="form-control" placeholder="Enter Title" value="@Model.Title">
 
+        </div>
+        <div class="form-group">
+
+            <label>Description</label>
+            <input name="Description" class="form-control" placeholder="Enter Description" value="@Model.Description">
+
+        </div>
+        <div class="form-group">
+
+            <label>Actual Amount</label>
+            <input name="AcutalAmount" class="form-control" placeholder="Enter Actual Amount" value="@Model.ActualAmount">
+
+        </div>
+        <div class="form-group">
+
+            <label>StartingTime</label>
+            <input name="StartingTime" class="form-control" placeholder="Enter StartingTime" value="@Model.StartingTime">
+
+        </div>
+        <div class="form-group">
+
+            <label>EndingTime</label>
+            <input name="EndingTime" class="form-control" placeholder="Enter EndingTime" value="@Model.EndingTime">
+
+        </div>
+       
     </div>
-    <div class="form-group">
-
-        <label>Description</label>
-        <input name="Description" class="form-control" placeholder="Enter Description" value="@Model.Description">
-
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <Button id="saveButton" type="submit" class="btn btn-primary">Submit</Button>
     </div>
-    <div class="form-group">
-
-        <label>Actual Amount</label>
-        <input name="AcutalAmount" class="form-control" placeholder="Enter Actual Amount" value="@Model.ActualAmount">
-
-    </div>
-    <div class="form-group">
-
-        <label>StartingTime</label>
-        <input name="StartingTime" class="form-control" placeholder="Enter StartingTime" value="@Model.StartingTime">
-
-    </div>
-    <div class="form-group">
-
-        <label>EndingTime</label>
-        <input name="EndingTime" class="form-control" placeholder="Enter EndingTime" value="@Model.EndingTime">
-
-    </div>
-    <Button id="saveButton" type="submit" class="btn btn-primary">Submit</Button>
 </form>
 
 <script>
@@ -48,12 +62,11 @@
             data: $("#editForm").serialize()
         })
             .done(function (response) {
-                debugger;
+              
                 $("#listingArea").html(response);
+                $('#formModal').modal('toggle')
             });
     });
 </script>
-
-
 
 

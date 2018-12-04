@@ -23,7 +23,7 @@
                 <td>@auction.StartingTime</td>
                 <td>@auction.EndingTime</td>
                 <td>
-                    <Button class="editButton btn btn-primary" data-id="@auction.ID">Edit</Button>
+                    <Button class="editButton btn btn-primary" data-id="@auction.ID" data-toggle="modal" data-target="#formModal">Edit</Button>
                     <Button class="deleteButton btn btn-danger" data-id="@auction.ID">Delete</Button>
                 </td>
 
@@ -31,12 +31,7 @@
         }
     </table>
 
-    <button type="button" id="createButton" class="btn btn-success">AddNewRecord</button>
-
-    <div id="contentArea">
-
-    </div>
-
+    <button type="button" id="createButton" class="btn btn-success" data-toggle="modal" data-target="#formModal">AddNewRecord</button>
 
     <script>
 
@@ -49,7 +44,7 @@
             $("#contentArea").html(response);
         });
     });
-    
+
         $(".editButton").click(function () {
 
             debugger;
@@ -90,3 +85,12 @@
 </div>
 
 
+<!-- Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="contentArea">
+
+        </div>
+    </div>
+</div>
