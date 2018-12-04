@@ -54,5 +54,10 @@ namespace DealDash.Web.Controllers
             auctionService.DeleteAuction(auction);
             return View();
         }
+        public ActionResult Details(int ID)
+        {
+            var auction = auctionService.GetAuctionByID(ID);
+            return View(auction);
+        }
     }
 }

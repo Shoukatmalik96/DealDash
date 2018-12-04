@@ -202,6 +202,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ActionViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -288,6 +289,7 @@
     <Content Include="Views\Auction\Edit.cshtml" />
     <Content Include="Views\Auction\Delete.cshtml" />
     <Content Include="Views\Auction\Index.cshtml" />
+    <Content Include="Views\Auction\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DealDash.Services;
+using DealDash.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,18 @@ namespace DealDash.Web.Controllers
 {
     public class HomeController : Controller
     {
+        ActionViewModel vModel = new ActionViewModel();
+        AutionsService auctionService = new AutionsService();
+
         public ActionResult Index()
         {
-            return View();
+
+            var allauctions = auctionService.GetAllAuctions();
+            var promotedAuctions =auctionService.PromotedAuctions();
+            vModel.AllAuctions = allauctions;
+            vModel.PromotedAuctions = promotedAuctions;
+            
+            return View(vModel);
         }
 
         public ActionResult About()

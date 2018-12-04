@@ -12,6 +12,10 @@ namespace DealDash.Services
     {
         DealDashDataContext context = new DealDashDataContext();
 
+        public List<Auction> PromotedAuctions()
+        {
+            return context.Auctions.Take(4).ToList();
+        }
         public List<Auction> GetAllAuctions()
         {
             return context.Auctions.ToList();
