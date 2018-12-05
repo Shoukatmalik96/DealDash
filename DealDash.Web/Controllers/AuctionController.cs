@@ -12,9 +12,9 @@ namespace DealDash.Web.Controllers
     public class AuctionController : Controller
     {
         AutionsService auctionService = new AutionsService();
+        CategoriesService categoriesService = new CategoriesService();
 
 
-        
         public ActionResult Index()
         {
             AuctionsListingViewModel model = new AuctionsListingViewModel();
@@ -34,11 +34,48 @@ namespace DealDash.Web.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return PartialView();
+            CreateAuctionViewModel model = new CreateAuctionViewModel();
+            model.categories = categoriesService.GetAllCategories();
+            return PartialView(model);
         }
         [HttpPost]
-        public ActionResult Create(Auction auction)
+        public ActionResult Create(CreateAuctionViewModel model)
         {
+            //Auction auction = new Auction();
+            //auction.Title = model.Title;
+            //auction.ActualAmount = model.ActualAmount;
+            //auction.Description = model.Description;
+            //auction.StartingTime = model.StartingTime;
+            //auction.EndingTime = model.EndingTime;
+           
+            //var pictureIDs = model.AuctionPictures
+            //                            .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+            //                            .Select(ID => int.Parse(ID)).ToList();
+            //List<AuctionPicture> auctionPictures = new List<AuctionPicture>();
+
+            //auctionPictures = pictureIDs.Select(x => new AuctionPicture() { PictureID = x }).ToList();
+            //auction.AuctionPictures = new List<AuctionPicture>();
+            //auction.AuctionPictures.AddRange(pictureIDs.Select(x=> new AuctionPicture { PictureID = x}).ToList());
+            //auctionService.SaveAuction(auction);
+
+
+
+            Auction auction = new Auction();
+            auction.Title = model.Title;
+            auction.CategoryID = model.CategoryID;
+            auction.Description = model.Description;
+            auction.ActualAmount = model.ActualAmount;
+            auction.StartingTime = model.StartingTime;
+            auction.EndingTime = model.EndingTime;
+
+            //LINQ
+            var pictureIDs = model.AuctionPictures
+                                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                        .Select(ID => int.Parse(ID)).ToList();
+
+            auction.AuctionPictures = new List<AuctionPicture>();
+            auction.AuctionPictures.AddRange(pictureIDs.Select(x => new AuctionPicture() { PictureID = x }).ToList());
+
             auctionService.SaveAuction(auction);
             return RedirectToAction("Listing");
         }

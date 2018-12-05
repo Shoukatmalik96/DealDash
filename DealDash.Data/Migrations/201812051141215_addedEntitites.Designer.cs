@@ -7,13 +7,13 @@ namespace DealDash.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddedAuctionEntity : IMigrationMetadata
+    public sealed partial class addedEntitites : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedAuctionEntity));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addedEntitites));
         
         string IMigrationMetadata.Id
         {
-            get { return "201812040741314_AddedAuctionEntity"; }
+            get { return "201812051141215_addedEntitites"; }
         }
         
         string IMigrationMetadata.Source

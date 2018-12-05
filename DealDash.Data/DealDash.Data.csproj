@@ -49,9 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DealDashDataContext.cs" />
-    <Compile Include="Migrations\201812040741314_AddedAuctionEntity.cs" />
-    <Compile Include="Migrations\201812040741314_AddedAuctionEntity.Designer.cs">
-      <DependentUpon>201812040741314_AddedAuctionEntity.cs</DependentUpon>
+    <Compile Include="Migrations\201812051141215_addedEntitites.cs" />
+    <Compile Include="Migrations\201812051141215_addedEntitites.Designer.cs">
+      <DependentUpon>201812051141215_addedEntitites.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,8 +67,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812040741314_AddedAuctionEntity.resx">
-      <DependentUpon>201812040741314_AddedAuctionEntity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201812051141215_addedEntitites.resx">
+      <DependentUpon>201812051141215_addedEntitites.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

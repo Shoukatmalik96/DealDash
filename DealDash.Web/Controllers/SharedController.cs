@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DealDash.Entities;
+using DealDash.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +11,8 @@ namespace DealDash.Web.Controllers
 {
     public class SharedController:Controller
     {
+
+        SharedService service = new SharedService();
 
         [HttpPost]
         public JsonResult UploadPictures()
@@ -29,12 +33,12 @@ namespace DealDash.Web.Controllers
 
                 picture.SaveAs(path);
 
-                //var dbPicture = new Picture();
-                //dbPicture.URL = fileName;
+                var dbPicture = new Pictures();
+                dbPicture.URL = fileName;
 
-                //int pictureID = service.SavePicture(dbPicture);
+                int pictureID = service.SavePicture(dbPicture);
 
-                //picturesJSON.Add(new { ID = pictureID, pictureURL = fileName });
+                picturesJSON.Add(new { ID = pictureID, pictureURL = fileName });
             }
 
             result.Data = picturesJSON;

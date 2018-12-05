@@ -35,6 +35,6 @@ namespace DealDash.Web.viewModels
         public DateTime EndingTime { get; set; }
         public string AuctionPictures { get; set; }
 
-        //public List<Category> Categories { get; set; }
+       public List<Category> categories { get; set; }
     }
 }

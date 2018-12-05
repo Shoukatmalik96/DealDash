@@ -10,11 +10,14 @@ namespace DealDash.Data
 {
     public class DealDashDataContext:DbContext
     {
-        public DealDashDataContext():base("name=DealDashConnectionString")
+        public DealDashDataContext():base("name=BMGTConnectionString")
         {
 
         }
         public DbSet<Auction> Auctions { get; set; }
+        public DbSet<AuctionPicture> AuctionPicture { get; set; }
+        public DbSet<Category> Category { get; set; }
+        public DbSet<Pictures> Pictures { get; set; }
     }
 
 }

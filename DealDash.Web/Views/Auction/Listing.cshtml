@@ -9,9 +9,9 @@
             <th>
                 Title
             </th>
-            @*<th>
+            <th>
                 Category
-            </th>*@
+            </th>
             <th>
                 Description
             </th>
@@ -36,10 +36,10 @@
                 <td>
                     <input type="hidden" value="@auction.ID" />
                     @auction.Title
+               </td>
+                <td>
+                     @auction.Category.Name
                 </td>
-                @*<td>
-                    @auction.Category.Name
-                </td>*@
                 <td>
                     @auction.Description
                 </td>
