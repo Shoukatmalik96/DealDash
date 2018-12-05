@@ -1,88 +1,82 @@
-﻿@model List<DealDash.Entities.Auction>
+﻿@model DealDash.Web.viewModels.AuctionsListingViewModel
 @{
     ViewBag.Title = "Listing";
 }
 
-<h2>Listing</h2>
-
 <table class="table table-hover">
-    <tr>
-        <th scope="col">Title</th>
-        <th scope="col">Description</th>
-        <th scope="col">ActualAmount</th>
-        <th scope="col">StartingTime</th>
-        <th scope="col">EndingTime</th>
-        <th scope="col">Actions</th>
-    </tr>
-    @foreach (var auction in Model)
-    {
+    <thead>
         <tr>
-            <td>@auction.Title</td>
-            <td>@auction.Description</td>
-            <td>@auction.ActualAmount</td>
-            <td>@auction.StartingTime</td>
-            <td>@auction.EndingTime</td>
-            <td>
-                <Button class="editButton btn btn-primary" data-id="@auction.ID" data-toggle="modal" data-target="#formModal">Edit</Button>
-                <Button class="deleteButton btn btn-danger" data-id="@auction.ID">Delete</Button>
-            </td>
-
+            <th>
+                Title
+            </th>
+            @*<th>
+                Category
+            </th>*@
+            <th>
+                Description
+            </th>
+            <th>
+                Actual Amount
+            </th>
+            <th>
+                Starting Time
+            </th>
+            <th>
+                Ending Time
+            </th>
+            <th>
+                Actions
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var auction in Model.Auctions)
+        {
+            <tr>
+                <td>
+                    <input type="hidden" value="@auction.ID" />
+                    @auction.Title
+                </td>
+                @*<td>
+                    @auction.Category.Name
+                </td>*@
+                <td>
+                    @auction.Description
+                </td>
+                <td>
+                    @auction.ActualAmount
+                </td>
+                <td>
+                    @auction.StartingTime
+                </td>
+                <td>
+                    @auction.EndingTime
+                </td>
+                <td>
+                    <button class="editButton btn btn-primary" data-id="@auction.ID" data-toggle="modal" data-target="#formModal">Edit</button>
+                    <button class="deleteButton btn btn-danger" data-id="@auction.ID" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
-<h2>Index</h2>
-<div id="listingArea">
 
+<script>
+	$(".editButton").click(function () {
+		$.ajax({
+			url: "@Url.Action("Edit", "Auction")",
+			method: "get",
+			data: {
+				ID: $(this).attr("data-id")
+			}
+		}).done(function (response) {
+			$("#contentArea").html(response);
+			$('#formModal').modal('toggle');
+		});
+	});
 
-    <button type="button" id="createButton" class="btn btn-success" data-toggle="modal" data-target="#formModal">AddNewRecord</button>
-
-    <script>
-
-    $("#createButton").click(function () {
-
-        $.ajax({
-            url: "@Url.Action("Create","Auction")",
-            type:"GET"
-        }).done(function (response) {
-            $("#contentArea").html(response);
-        });
-    });
-
-        $(".editButton").click(function () {
-
-            debugger;
-            $.ajax({
-                url: "@Url.Action("Edit","Auction")",
-                type: "GET",
-                data: {
-                    ID: $(this).attr("data-id")
-                }
-            }).done(function (response) {
-                $("#contentArea").html(response);
-            });
-        });
-
-        $(".deleteButton").click(function () {
-
-          debugger;
-
-             var result = confirm("Are you sure you want to delete this Auction?");
-
-            debugger;
-
-            if (result == true) {
-                $.ajax({
-                    url: "@Url.Action("Delete","Auction")",
-                    method: "post",
-                    data: {
-                        ID: $(this).attr("data-id")
-                    }
-                })
-                    .done(function (response) {
-                        debugger;
-                        $("#listingArea").html(response);
-                    });
-             }
-        });
-    </script>
-</div>
+	$(".deleteButton").click(function () {
+		$('#deleteModal').modal('toggle');
+		$('#mDeleteButton').attr("data-recordID", $(this).attr("data-id"));
+	});
+</script>

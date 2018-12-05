@@ -1,5 +1,6 @@
 ﻿using DealDash.Entities;
 using DealDash.Services;
+using DealDash.Web.viewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,26 +13,24 @@ namespace DealDash.Web.Controllers
     {
         AutionsService auctionService = new AutionsService();
 
-     
+
+        
         public ActionResult Index()
         {
-            var allAuctions = auctionService.GetAllAuctions();
-           
-            if (Request.IsAjaxRequest())
-            {
-                return PartialView(allAuctions);
-            }
-            else
-            {
-                return View(allAuctions);
-            }
+            AuctionsListingViewModel model = new AuctionsListingViewModel();
+            model.PageTitle = "Auction";
+            model.PageDescription = "Auction Listing Page";
+            return View(model);
         }
-
+       
         public ActionResult Listing()
         {
-            var allAuctions = auctionService.GetAllAuctions();
-            return View(allAuctions);
+            AuctionsListingViewModel model =new AuctionsListingViewModel();
+            model.Auctions = auctionService.GetAllAuctions();
+            return PartialView(model);
         }
+
+
         [HttpGet]
         public ActionResult Create()
         {
