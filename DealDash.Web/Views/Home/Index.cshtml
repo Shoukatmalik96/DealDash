@@ -40,11 +40,14 @@
 
                 @foreach (var promotedAuction in Model.PromotedAuctions)
                 {
+                    var picUrl = "/Content/Images/" + promotedAuction.AuctionPictures;
 
+                    var picURL = promotedAuction.AuctionPictures != null && promotedAuction.AuctionPictures.Count > 0 ?
+                                 "/Content/images/" + promotedAuction.AuctionPictures.First().Picture.URL : "http://placehold.it/700x400";
 
                     <div class="col-lg-3 col-md-6 mb-4">
                         <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                            <a href="#"><img class="card-img-top" src="@picURL" alt=""></a>
                             <div class="card-body">
                                 <h4 class="card-title">
                                     <a href="@Url.Action("Details","Auction",new {ID =promotedAuction.ID })">@promotedAuction.Title</a>
@@ -61,11 +64,14 @@
                 }
                 @foreach (var allAuction in Model.AllAuctions)
                 {
+                    var picUrl = "/Content/Images/" + allAuction.AuctionPictures;
 
+                    var picURL = allAuction.AuctionPictures != null && allAuction.AuctionPictures.Count > 0 ?
+                                 "/Content/images/" + allAuction.AuctionPictures.First().Picture.URL : "http://placehold.it/700x400";
 
                     <div class="col-lg-3 col-md-6 mb-4">
                         <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                            <a href="#"><img class="card-img-top" src="@picURL" alt=""></a>
                             <div class="card-body">
                                 <h4 class="card-title">
                                     <a href="@Url.Action("Details","Auction",new {ID =allAuction.ID })">@allAuction.Title</a>
