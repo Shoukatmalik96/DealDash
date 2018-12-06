@@ -1,0 +1,78 @@
+﻿@model DealDash.Web.viewModels.CategoriesListingViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div id="listingArea">
+    <table>
+        <thead>
+            <tr>
+                <th>Category Name</th>
+                <th>Category Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var category in Model.categories)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>@category.Description</td>
+                    <td><Button class="editButton" data-id="@category.ID">Edit</Button></td>
+                    <td><Button class="deleteButton" data-id="@category.ID">Delete</Button></td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+    <Button type="button" id="createButton">Add New Record</Button>
+    <div id="contentArea"></div>
+
+    <script>
+
+        $("#createButton").click(function () {
+
+        $.ajax({
+            url: "@Url.Action("Create","Category")",
+            type: "get"
+        }).done(function (data) {
+            $("#contentArea").html(data)
+        });
+        });
+
+
+        $(".editButton").click(function () {
+        $.ajax({
+            url: "@Url.Action("Edit","Category")",
+            type: "get",
+            data: {
+
+                ID: $(this).attr("data-id")
+            }
+        }).done(function (data) {
+            $("#contentArea").html(data)
+        });
+        });
+
+        $(".deleteButton").click(function () {
+            debugger;
+        var result = confirm("Are you sure ? You want to delete this?");
+        $.ajax({
+            url: "@Url.Action("Delete","Category")",
+            type: "get",
+            data: {
+
+                ID: $(this).attr("data-id")
+            }
+        }).done(function (data) {
+            $("#listingArea").html(data)
+          });
+         
+    });
+    </script>
+
+</div>

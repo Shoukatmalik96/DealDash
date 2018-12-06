@@ -1,0 +1,32 @@
+﻿@model DealDash.Entities.Category
+
+
+<h2>Edit</h2>
+
+<form action="/Category/Edit" method="post" id="eidtForm">
+
+    <input type="hidden" name="ID" value="@Model.ID" />
+    <label>Category Name</label>
+    <input name="Name" value="@Model.Name" />
+    <br />
+    <label>Category Description</label>
+    <input name="Description" value="@Model.Description"/>
+    <br />
+    <button id="saveButton">Submit</button>
+</form>
+
+
+<script>
+
+    $("#saveButton").click(function () {
+        $.ajax({
+            url: "@Url.Action("Edit","Category")",
+            type: "post",
+            data: $("#eidtForm").serialize();
+                   
+        }).done(function (response) {
+            debugger;
+            $("#listingArea").html(response);
+        });
+    });
+</script>

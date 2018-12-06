@@ -30,7 +30,7 @@ namespace DealDash.Services
             context.Entry(category).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
         }
-        public void DeleteAuction(Category category)
+        public void DeleteCategory(Category category)
         {
             context.Entry(category).State = System.Data.Entity.EntityState.Deleted;
             context.SaveChanges();

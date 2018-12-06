@@ -12,17 +12,17 @@
             {
                   var firstAuctionPicture = Model.Auction.AuctionPictures.First();
                   var i = 1;
-            <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
 
+                <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    @foreach (var picuture in Model.Auction.AuctionPictures)
-                    {
+                     @foreach (var picuture in Model.Auction.AuctionPictures)
+                     {
 
                         var active = picuture == firstAuctionPicture ? "active" : string.Empty;
 
                         <li data-target="carouselIndicators" data-slide-to="@i" class="@active"></li>
                         i++;
-                    }
+                      }
                 </ol>
                  
                 <div class="carousel-inner" role="listbox">
@@ -32,6 +32,7 @@
                         var active = auctionPicture == firstAuctionPicture ? "active" : string.Empty;
 
                         var picURL = "/Content/images/" + auctionPicture.Picture.URL;
+
                         <div class="@active">
                             <img class="d-block img-fluid" src="@picURL">
                         </div>
@@ -75,7 +76,6 @@
                     <a href="#" class="btn btn-success">Leave a Review</a>
                 </div>
             </div>
-
 
         </div>
            
