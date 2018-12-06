@@ -5,30 +5,37 @@
 
 <h2>Index</h2>
 
+
 <div id="listingArea">
-    <table>
-        <thead>
-            <tr>
-                <th>Category Name</th>
-                <th>Category Description</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="container">
+        <div class="col-hd-12">
 
-            @foreach (var category in Model.categories)
-            {
-                <tr>
-                    <td>@category.Name</td>
-                    <td>@category.Description</td>
-                    <td><Button class="editButton" data-id="@category.ID">Edit</Button></td>
-                    <td><Button class="deleteButton" data-id="@category.ID">Delete</Button></td>
-                </tr>
-            }
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Category Name</th>
+                        <th scope="col">Category Description</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-        </tbody>
-    </table>
+                    @foreach (var category in Model.categories)
+                    {
+                        <tr>
+                            <td scope="row">@category.Name</td>
+                            <td scope="row">@category.Description</td>
+                            <td scope="row">
+                            <Button class="editButton" data-id="@category.ID">Edit</Button>
+                            <Button class="deleteButton" data-id="@category.ID">Delete</Button>
+                            </td>
+                        </tr>
+                    }
 
+                </tbody>
+            </table>
+        </div>
+    </div>
     <Button type="button" id="createButton">Add New Record</Button>
     <div id="contentArea"></div>
 

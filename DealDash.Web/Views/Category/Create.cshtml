@@ -7,14 +7,17 @@
 
 <form action="/Category/Create" method="post" id="createForm">
 
-    <label>Category Name</label>
-    <input name="Name" />
-    <br />
-    <label>Category Description</label>
-    <input name="Description" />
-    <br />
-    <button id="saveButton" type="button">Submit</button>
+    <div class="form-group">
+        <label>Category Name</label>
+        <input class="form-control" placeholder="Enter Category Name" name="Name">
+    </div>
+    <div class="form-group">
+        <label>Category Description</label>
+        <input class="form-control" placeholder="Enter Category Description" name="Description">
+    </div>
+    <button id="saveButton" type="button" class="btn btn-success">Submit</button>
 </form>
+
 
 <script>
 
@@ -28,7 +31,7 @@
                    
         }).done(function (response) {
             debugger;
-            $("#contentArea").html(response);
+            $("#listingArea").html(response);
         });
     });
 
