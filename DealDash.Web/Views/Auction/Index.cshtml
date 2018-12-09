@@ -1,4 +1,4 @@
-﻿
+﻿@model DealDash.Web.viewModels.AuctionsListingViewModel
 <div class="row">
     <div class="col-lg-12 m-2">
 
@@ -11,9 +11,24 @@
 
         <div id="listingArea">
             <div>
-                @{ Html.RenderAction("Listing");}
+                @{ Html.RenderAction("Listing", new { categoryID = Model.categoryID,searhTerm =Model.searchTerm, pageNo = Model.pageNo});}
             </div>
         </div>
+        <!--Pagination code -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-lg-center">
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index","Auction",new { pageNo =Model.pager.CurrentPage - 1})">Previous</a>
+                </li>
+                @for (int page = Model.pager.StartPage; page < Model.pager.EndPage + 1; page++)
+                {
+                    <li class="page-item"><a class="page-link" href="@Url.Action("Index", "Auction", new { pageNo = page })">@page</a></li>
+                }
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index","Auction",new { pageNo =Model.pager.CurrentPage+1})">Next</a>
+                </li>
+            </ul>
+        </nav>
 
         <!-- Modal -->
         <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-hidden="true">

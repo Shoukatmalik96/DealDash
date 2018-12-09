@@ -8,7 +8,12 @@ namespace DealDash.Web.viewModels
 {
     public class AuctionsListingViewModel : PageViewModel
     {
+      
         public List<Auction> Auctions { get; set; }
+        public int? categoryID { get; set; }
+        public string searchTerm { get; set; }
+        public Pager pager { get; set; }
+        public int? pageNo { get; internal set; }
     }
 
     public class AuctionsViewModel : PageViewModel

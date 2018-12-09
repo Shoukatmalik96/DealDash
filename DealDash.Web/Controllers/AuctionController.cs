@@ -15,18 +15,26 @@ namespace DealDash.Web.Controllers
         CategoriesService categoriesService = new CategoriesService();
 
 
-        public ActionResult Index()
+        public ActionResult Index(int?categoryID, string searchTerm ,int? pageNo)
+
         {
             AuctionsListingViewModel model = new AuctionsListingViewModel();
+            pageNo = pageNo ?? 1;
             model.PageTitle = "Auction";
             model.PageDescription = "Auction Listing Page";
+            model.categoryID= categoryID;
+            model.searchTerm = searchTerm;
+            model.pageNo = pageNo;
             return View(model);
         }
        
-        public ActionResult Listing()
+        public ActionResult Listing(int? categoryID, string searchTerm, int? pageNo)
         {
+            int pageSize = 1;
             AuctionsListingViewModel model =new AuctionsListingViewModel();
-            model.Auctions = auctionService.GetAllAuctions();
+            model.Auctions = auctionService.serchAuctions(categoryID, searchTerm, pageNo, pageSize);
+            var totalAuctions = auctionService.GetAutionCount();
+            model.pager = new Pager(totalAuctions, pageNo, pageSize);
             return PartialView(model);
         }
 

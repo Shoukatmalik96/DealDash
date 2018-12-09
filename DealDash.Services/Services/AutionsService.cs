@@ -12,9 +12,36 @@ namespace DealDash.Services
     {
         DealDashDataContext context = new DealDashDataContext();
 
+        public List<Auction> serchAuctions(int? categoryID, string searchTerm, int? pageNo,int pageSize)
+        {
+            var auctions = context.Auctions.AsQueryable();
+
+            if (categoryID.HasValue && categoryID.Value>0)
+            {
+                auctions = context.Auctions.Where(x => x.CategoryID == categoryID.Value);
+            }
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+               auctions = auctions.Where(x => x.Title.ToLower().Contains(searchTerm.ToLower()));
+            }
+
+            pageNo = pageNo ?? 1;
+            //pageNo = pageNo.HasValue ? pageNo.Value : 1;
+
+            //Skip Auctions Record
+            var skipCount = (pageNo.Value - 1) * pageSize;
+
+            // we want to show latest on the top so we apply Order by descending
+            return auctions.OrderByDescending(x=>x.CategoryID).Skip(skipCount).Take(pageSize).ToList();
+        }
+
         public List<Auction> PromotedAuctions()
         {
             return context.Auctions.Take(4).ToList();
+        }
+        public int GetAutionCount()
+        {
+            return context.Auctions.Count();
         }
         public List<Auction> GetAllAuctions()
         {
