@@ -1,20 +1,29 @@
 ﻿@model DealDash.Entities.Category
 
+<div class="modal-header">
+    <h5 class="modal-title">Edit Category</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 
-<h2>Edit</h2>
+<form action="/Category/Edit" method="post" id="editForm">
+    <div class="modal-body">
+        <div class="form-group">
+            <label>Category Name</label>
+            <input class="form-control" placeholder="Enter Category Name" name="Name" value="@Model.Name">
+        </div>
+        <div class="form-group">
+            <label>Category Description</label>
+            <input class="form-control" placeholder="Enter Category Description" name="Description" value="@Model.Description">
+        </div>
 
-<form action="/Category/Edit" method="post" id="eidtForm">
-
-    <input type="hidden" name="ID" value="@Model.ID" />
-    <label>Category Name</label>
-    <input name="Name" value="@Model.Name" />
-    <br />
-    <label>Category Description</label>
-    <input name="Description" value="@Model.Description"/>
-    <br />
-    <button id="saveButton">Submit</button>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="saveButton" type="button" class="btn btn-success">Save</button>
+        </div>
+    </div>
 </form>
-
 
 <script>
 
@@ -23,7 +32,7 @@
             url: "@Url.Action("Edit","Category")",
             type: "post",
             data: $("#eidtForm").serialize();
-                   
+
         }).done(function (response) {
             debugger;
             $("#listingArea").html(response);
