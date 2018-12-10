@@ -36,9 +36,9 @@
                 <td>
                     <input type="hidden" value="@auction.ID" />
                     @auction.Title
-               </td>
+                </td>
                 <td>
-                     @auction.Category.Name
+                    @auction.Category.Name
                 </td>
                 <td>
                     @auction.Description
@@ -60,6 +60,13 @@
         }
     </tbody>
 </table>
+<!--Pagination code -->
+<div>
+      
+     @{ 
+        Html.RenderAction("Pager",new { pager = Model.pager, controller = "Auction",action="Index"});
+      }
+</div>
 
 <script>
 	$(".editButton").click(function () {

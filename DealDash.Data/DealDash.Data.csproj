@@ -49,19 +49,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DealDashDataContext.cs" />
-    <Compile Include="Migrations\201812051141215_addedEntitites.cs" />
-    <Compile Include="Migrations\201812051141215_addedEntitites.Designer.cs">
-      <DependentUpon>201812051141215_addedEntitites.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812060914548_remove IsActie.cs" />
-    <Compile Include="Migrations\201812060914548_remove IsActie.Designer.cs">
-      <DependentUpon>201812060914548_remove IsActie.cs</DependentUpon>
+    <Compile Include="Migrations\201812100639246_addedEntities.cs" />
+    <Compile Include="Migrations\201812100639246_addedEntities.Designer.cs">
+      <DependentUpon>201812100639246_addedEntities.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -71,11 +69,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812051141215_addedEntitites.resx">
-      <DependentUpon>201812051141215_addedEntitites.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812060914548_remove IsActie.resx">
-      <DependentUpon>201812060914548_remove IsActie.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201812100639246_addedEntities.resx">
+      <DependentUpon>201812100639246_addedEntities.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

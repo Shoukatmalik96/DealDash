@@ -50,4 +50,11 @@ namespace DealDash.Web.viewModels
         public int StartPage { get; private set; }
         public int EndPage { get; private set; }
     }
+
+    public class PagerViewModel
+    {
+        public Pager Pager { get; set; }
+        public string controller { get; set; }
+        public string action { get; set; }
+    }
 }

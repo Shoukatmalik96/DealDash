@@ -16,7 +16,6 @@ namespace DealDash.Web.Controllers
 
 
         public ActionResult Index(int?categoryID, string searchTerm ,int? pageNo)
-
         {
             AuctionsListingViewModel model = new AuctionsListingViewModel();
             pageNo = pageNo ?? 1;
@@ -34,6 +33,7 @@ namespace DealDash.Web.Controllers
             AuctionsListingViewModel model =new AuctionsListingViewModel();
             model.Auctions = auctionService.serchAuctions(categoryID, searchTerm, pageNo, pageSize);
             var totalAuctions = auctionService.GetAutionCount();
+
             model.pager = new Pager(totalAuctions, pageNo, pageSize);
             return PartialView(model);
         }
@@ -102,6 +102,14 @@ namespace DealDash.Web.Controllers
             model.PageTitle = "Auctions Details: " + model.Auction.Title;
             model.PageDescription = model.Auction.Description.Substring(0, 10);
             return View(model);
+        }
+        public ActionResult Pager(Pager pager,string controller,string action)
+        {
+            DealDash.Web.viewModels.PagerViewModel model = new PagerViewModel();
+            model.Pager = pager;
+            model.controller =controller;
+            model.action = action;
+            return PartialView(model);
         }
     }
 }
