@@ -16,6 +16,7 @@ namespace DealDash.Web.Controllers
 
         public ActionResult Index()
         {
+            
             CategoriesListingViewModel model = new CategoriesListingViewModel();
             model.categories = categoryService.GetAllCategories();
             return View(model);

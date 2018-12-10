@@ -24,6 +24,11 @@ namespace DealDash.Web.Controllers
             model.categoryID= categoryID;
             model.searchTerm = searchTerm;
             model.pageNo = pageNo;
+            model.Categories = categoriesService.GetAllCategories();
+            if (model.Categories ==null)
+            {
+                model.Categories = new List<Category>();
+            }
             return View(model);
         }
        
@@ -31,11 +36,11 @@ namespace DealDash.Web.Controllers
         {
             int pageSize = 1;
             AuctionsListingViewModel model =new AuctionsListingViewModel();
-            model.Auctions = auctionService.serchAuctions(categoryID, searchTerm, pageNo, pageSize);
-            var totalAuctions = auctionService.GetAutionCount();
-
-            model.pager = new Pager(totalAuctions, pageNo, pageSize);
-            return PartialView(model);
+           
+             model.Auctions = auctionService.serchAuctions(categoryID, searchTerm, pageNo, pageSize);
+             var totalAuctions = auctionService.GetAutionCount();
+             model.pager = new Pager(totalAuctions, pageNo, pageSize);
+             return PartialView(model);
         }
 
 
@@ -43,31 +48,49 @@ namespace DealDash.Web.Controllers
         public ActionResult Create()
         {
             CreateAuctionViewModel model = new CreateAuctionViewModel();
-            model.categories = categoriesService.GetAllCategories();
+
+            model.Categories = categoriesService.GetAllCategories();
             return PartialView(model);
+          
         }
         [HttpPost]
-        public ActionResult Create(CreateAuctionViewModel model)
+        public JsonResult Create(CreateAuctionViewModel model)
         {
-          
-            Auction auction = new Auction();
-            auction.Title = model.Title;
-            auction.CategoryID = model.CategoryID;
-            auction.Description = model.Description;
-            auction.ActualAmount = model.ActualAmount;
-            auction.StartingTime = model.StartingTime;
-            auction.EndingTime = model.EndingTime;
+            JsonResult result = new JsonResult();
+            if (ModelState.IsValid)
+            {
 
-            //LINQ
-            var pictureIDs = model.AuctionPictures
-                                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                                        .Select(ID => int.Parse(ID)).ToList();
+                 
+                 Auction auction = new Auction();
+                 auction.Title = model.Title;
+                 auction.CategoryID = model.CategoryID;
+                 auction.Description = model.Description;
+                 auction.ActualAmount = model.ActualAmount;
+                 auction.StartingTime = model.StartingTime;
+                 auction.EndingTime = model.EndingTime;
 
-            auction.AuctionPictures = new List<AuctionPicture>();
-            auction.AuctionPictures.AddRange(pictureIDs.Select(x => new AuctionPicture() { PictureID = x }).ToList());
+                
+                if (string.IsNullOrEmpty(model.AuctionPictures))
+                {
+                    var pictureIDs = model.AuctionPictures
+                                       .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                       .Select(ID => int.Parse(ID)).ToList();
 
-            auctionService.SaveAuction(auction);
-            return RedirectToAction("Listing");
+                    auction.AuctionPictures = new List<AuctionPicture>();
+                    auction.AuctionPictures.AddRange(pictureIDs.Select(x => new AuctionPicture() { PictureID = x }).ToList());
+                }
+           
+
+                 auctionService.SaveAuction(auction);
+                 result.Data = new { Success = true };
+            }
+            else
+            {
+                result.Data = new { Success = false, Error = "Unable to save Auction. Please enter valid values." };
+            }
+
+            return result;
+
         }
         [HttpGet]
         public ActionResult Edit(int ID)
@@ -110,6 +133,11 @@ namespace DealDash.Web.Controllers
             model.controller =controller;
             model.action = action;
             return PartialView(model);
+        }
+        public ActionResult Search()
+        {
+            
+            return PartialView();
         }
     }
 }

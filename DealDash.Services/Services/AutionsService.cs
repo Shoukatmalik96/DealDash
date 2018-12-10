@@ -11,7 +11,6 @@ namespace DealDash.Services
     public class AutionsService
     {
         DealDashDataContext context = new DealDashDataContext();
-
         public List<Auction> serchAuctions(int? categoryID, string searchTerm, int? pageNo,int pageSize)
         {
             var auctions = context.Auctions.AsQueryable();

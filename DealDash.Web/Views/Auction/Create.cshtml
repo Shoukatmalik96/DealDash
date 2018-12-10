@@ -12,7 +12,7 @@
             <label>
                 Title
             </label>
-            <input class="form-control" name="Title" />
+            <input class="form-control" name="Title" value="@Model.Title" />
         </div>
 
         <div class="form-group">
@@ -20,7 +20,7 @@
                 Category
             </label>
             <select class="form-control" name="CategoryID">
-                @foreach (var cateory in Model.categories)
+                @foreach (var cateory in Model.Categories)
                 {
                     <option value="@cateory.ID">@cateory.Name</option>
                 }
@@ -31,28 +31,28 @@
             <label>
                 Description
             </label>
-            <input class="form-control" name="Description" />
+            <input class="form-control" name="Description" value="@Model.Description" />
         </div>
 
         <div class="form-group">
             <label>
                 ActualAmount
             </label>
-            <input class="form-control" name="ActualAmount" />
+            <input class="form-control" name="ActualAmount" value="@Model.ActualAmount" />
         </div>
 
         <div class="form-group">
             <label>
                 StartingTime
             </label>
-            <input class="form-control" name="StartingTime" />
+            <input class="form-control" name="StartingTime" value="@Model.StartingTime" />
         </div>
 
         <div class="form-group">
             <label>
                 EndingTime
             </label>
-            <input class="form-control" name="EndingTime" />
+            <input class="form-control" name="EndingTime" value="@Model.EndingTime" />
         </div>
 
         <div class="form-group">
@@ -62,6 +62,9 @@
             <input id="auctionPictures" class="form-control" name="AuctionPictures" type="file" multiple />
             <div id="picturesArea"></div>
             <input type="hidden" name="AuctionPictures" id="pictureIDs" />
+        </div>
+        <!--Show Error Message to user-->
+        <div id="formError"class="form-group bg-danger" style="display:none">  
         </div>
     </div>
     <div class="modal-footer">
@@ -90,10 +93,16 @@
 			url: "@Url.Action("Create","Auction")",
 			method: "post",
 			data: $("#createForm").serialize()
-		})
-		.done(function (response) {
-			$("#listingArea").html(response);
-			$('#formModal').modal('toggle');
+		}).done(function (response) {
+           debugger;
+           if (response.Success) {
+               ReloadListing();
+               $('#formModal').modal('toggle');
+           }
+           else {
+               $("#formError").html(response.Error);
+               $("#formError").show();
+           }
 		});
 	});
 

@@ -8,10 +8,34 @@
         <div class="float-right">
             <button class="btn btn-success" id="createButton" data-toggle="modal" data-target="#formModal">Create New Auction</button>
         </div>
-
+        <br />
+        <br />
+        <div class="float-left">
+            <form type="post">
+                <div class="form-row align-items-center">
+                    <div class="col-auto my-1">
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                            @foreach (var category in Model.Categories)
+                             {
+                                <option name="ID" value="@category.ID">@category.Name</option>
+                             } 
+                            
+                        </select>
+                    </div>
+                    <div class="col-auto my-1">
+                        <div class="custom-control custom-checkbox mr-sm-2">
+                            <input class="form-control" placeholder="Search" name="Search" id="searchTxt">
+                        </div>
+                    </div>
+                    <div class="col-auto my-1">
+                        <button type="button" class="btn btn-primary" id="searchButton">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
         <div id="listingArea">
             <div>
-                @{ Html.RenderAction("Listing", new { categoryID = Model.categoryID,searhTerm =Model.searchTerm, pageNo = Model.pageNo});}
+                @{ Html.RenderAction("Listing", new { categoryID = Model.categoryID, searhTerm = Model.searchTerm, pageNo = Model.pageNo });}
             </div>
         </div>
         <!-- Modal -->
@@ -51,6 +75,20 @@
 
 <script>
 
+    $("#searchButton").click(function () {
+        debugger;
+            var searchValue = $("#searchTxt").val();
+		    $.ajax({
+		    	url: "@Url.Action("Index", "Auction")",
+                type: "POST",
+                data: {
+                    searchTerm: searchValue
+                }
+            }).done(function (response) {
+                $("#listingArea").html(response)
+		    });
+	});
+
     $("#createButton").click(function () {
 		$.ajax({
 			url: "@Url.Action("Create", "Auction")",
@@ -80,6 +118,16 @@
 			$(this).remove();
 		});
     }
+
+    function ReloadListing() {
+		$.ajax({
+			url: "@Url.Action("Listing", "Auctions")",
+			type: "get"
+		}).done(function (response) {
+			$("#listingArea").html(response);
+		});
+	}
+    
 
 </script>
 
