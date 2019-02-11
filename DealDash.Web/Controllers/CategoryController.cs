@@ -18,16 +18,7 @@ namespace DealDash.Web.Controllers
         {
             CategoriesListingViewModel model = new CategoriesListingViewModel();
             model.categories = categoryService.GetAllCategories();
-
-            if (Request.IsAjaxRequest())
-            {
-                return PartialView(model);
-            }
-            else
-            {
-                return View(model);
-            }
-            
+            return View(model);
         }
         [HttpGet]
         public ActionResult Create()
@@ -45,7 +36,7 @@ namespace DealDash.Web.Controllers
         public ActionResult Edit(int ID)
         {
             var category = categoryService.GetCategoryByID(ID);
-            return PartialView(category);
+            return View(category);
         }
         [HttpPost]
         public ActionResult Edit(Category category)

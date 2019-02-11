@@ -3,42 +3,32 @@
     ViewBag.Title = "Create";
 }
 
-
-<div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLongTitle">Add New Category</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+<h2>Create</h2>
 
 <form action="/Category/Create" method="post" id="createForm">
-    <div class="modal-body">
-        <div class="form-group">
-            <label>Category Name</label>
-            <input class="form-control" placeholder="Enter Category Name" name="Name">
-        </div>
-        <div class="form-group">
-            <label>Category Description</label>
-            <input class="form-control" placeholder="Enter Category Description" name="Description">
-        </div>
 
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button id="saveButton" type="button" class="btn btn-success">Save</button>
-        </div>
+    <div class="form-group">
+        <label>Category Name</label>
+        <input class="form-control" placeholder="Enter Category Name" name="Name">
     </div>
+    <div class="form-group">
+        <label>Category Description</label>
+        <input class="form-control" placeholder="Enter Category Description" name="Description">
+    </div>
+    <button id="saveButton" type="button" class="btn btn-success">Submit</button>
 </form>
+
 
 <script>
 
-
+    
     $("#saveButton").click(function () {
         debugger
         $.ajax({
             url: "@Url.Action("Create","Category")",
             type: "post",
             data: $("#createForm").serialize()
-
+                   
         }).done(function (response) {
             debugger;
             $("#listingArea").html(response);
