@@ -10,7 +10,7 @@ namespace DealDash.Data
 {
     public class DealDashDataContext:DbContext
     {
-        public DealDashDataContext():base("name=BMGTConnectionString")
+        public DealDashDataContext():base("DealdoubleConnectionString")
         {
 
         }
